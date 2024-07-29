@@ -9,3 +9,11 @@
 .title {
   text-align: center;
 }
+
+.picture-container {
+  position: relative;
+}
+
+.targeting-box {
+  position: absolute;
+}

@@ -5,14 +5,17 @@ function App() {
   function handleClick(e) {
     console.log(e);
     const targetingBox = document.querySelector(".targeting-box");
-    console.log(targetingBox);
-    targetingBox.showModal();
+    if (targetingBox.open) {
+      targetingBox.close();
+    } else {
+      targetingBox.show();
+    }
   }
 
   return (
     <>
       <h1 className="title">Where's Waldo?</h1>
-      <main>
+      <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
         <dialog className="targeting-box">
           <h2>Hello.</h2>
