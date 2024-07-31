@@ -14,6 +14,36 @@
   position: relative;
 }
 
-.targeting-box {
+.targeting-box[open] {
   position: absolute;
+  margin: 0;
+  display:flex;
+  gap: 1rem;
+}
+
+.targeting-box div {
+  display: flex;
+  flex-direction:column;
+  align-items: center;
+}
+
+.character-button {
+  border-radius: 50%;
+  width: 5vw;
+  height: 5vw;
+  padding: 0;
+  border: 3px solid;
+  cursor: pointer;
+}
+
+.character-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.character-name {
+  text-align: center;
+  margin: 0;
 }
