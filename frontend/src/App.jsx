@@ -26,6 +26,23 @@ function App() {
   return (
     <>
       <h1 className="title">Where's Waldo?</h1>
+      <section style={{ margin: "1rem"}}>
+        <p>Find all the characters!</p>
+        <div className="characters">
+          <div>
+            <img src={deadpool} alt="deadpool" className="main-character-image"/>
+            <p className="character-name">Deadpool</p>
+          </div>
+          <div>
+            <img src={flash} alt="flash" className="main-character-image"/>
+            <p className="character-name">Flash</p>
+          </div>
+          <div>
+            <img src={spiderman} alt="spiderman" className="main-character-image"/>
+            <p className="character-name">Spiderman</p>
+          </div>
+        </div>
+      </section>
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
         <dialog className="targeting-box" style={{ "top": coordinates && `${coordinates[1]}px`, "left": coordinates && `${coordinates[0]}px` }}>
