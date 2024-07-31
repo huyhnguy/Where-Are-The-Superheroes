@@ -19,6 +19,9 @@
   margin: 0;
   display:flex;
   gap: 1rem;
+  --mask: radial-gradient(20px at 0 0,#0000 98%,#000);
+  -webkit-mask: var(--mask);
+          mask: var(--mask);
 }
 
 .targeting-box div {
