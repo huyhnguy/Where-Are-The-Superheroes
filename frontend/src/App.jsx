@@ -9,15 +9,30 @@ function App() {
   const [coordinates, setCoordinates] = useState(null);
 
   function handleClick(e) {
-    console.log(e);
     const targetingBox = document.querySelector(".targeting-box");
-    const pictureContainer = document.querySelector(".picture-container")
 
     if (targetingBox.open) {
       targetingBox.close();
     } else {
+      const pictureContainer = document.querySelector(".picture-container");
+      const pictureDimensions = pictureContainer.getBoundingClientRect();
       const leftPosition = e.pageX - (pictureContainer.offsetLeft);
       const topPosition = e.pageY - (pictureContainer.offsetTop);
+      const widthPercentage = leftPosition / pictureDimensions.width;
+      const heightPercentage = topPosition / pictureDimensions.height;
+
+      if (widthPercentage > 0.42 && widthPercentage < 0.44 && heightPercentage > 0.59 && heightPercentage < 0.63) {
+        console.log ("You found Flash!");
+      }
+  
+      if (widthPercentage > 0.73 && widthPercentage < 0.75 && heightPercentage > 0.72 && heightPercentage < 0.77) {
+        console.log ("You found Deadpool!");
+      }
+  
+      if (widthPercentage > 0.75 && widthPercentage < 0.77 && heightPercentage > 0.18 && heightPercentage < 0.21) {
+        console.log ("You found Spiderman!");
+      }
+
       setCoordinates([leftPosition, topPosition]);
       targetingBox.show();
     }
@@ -25,11 +40,11 @@ function App() {
 
   return (
     <>
-      <h1 className="title">Where's Waldo?</h1>
+      <h1 className="title">Where Are The Superheroes?</h1>
       <section style={{ margin: "1rem"}}>
-        <p>Find all the characters!</p>
+        <p style={{textAlign: "center"}}>Find all of them!</p>
         <div className="characters">
-          <div>
+          <div >
             <img src={deadpool} alt="deadpool" className="main-character-image"/>
             <p className="character-name">Deadpool</p>
           </div>
