@@ -120,7 +120,7 @@ function App() {
             </div>
           }
         </dialog>
-        <span className="dot"></span>
+        <span className="dot" style={{ "top": boxCoordinates && `calc(${boxCoordinates[1]}px - 12.5px)`, "left": boxCoordinates && `calc(${boxCoordinates[0]}px - 12.5px)` }}></span>
       </main>
 
     </>
