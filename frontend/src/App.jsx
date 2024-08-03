@@ -9,9 +9,9 @@ import { useState } from "react";
 function App() {
   const [boxCoordinates, setBoxCoordinates] = useState(null);
   const [coordinatePercentages, setCoordinatePercentages] = useState(null);
-  const [deadpoolFound, setDeadpoolFound] = useState(false);
-  const [flashFound, setFlashFound] = useState(false);
-  const [spidermanFound, setSpidermanFound] = useState(false);
+  const [deadpoolCoordinates, setDeadpoolCoordinates] = useState(null);
+  const [flashCoordinates, setFlashCoordinates] = useState(null);
+  const [spidermanCoordinates, setSpidermanCoordinates] = useState(null);
 
   function handleClick(e) {
     const targetingBox = document.querySelector(".targeting-box");
@@ -54,9 +54,16 @@ function App() {
       .then(res => res.json())
       .then(data => {
         if (data.message === "Pass") {
-          if (character === "deadpool") {setDeadpoolFound(true)};
-          if (character === "flash") {setFlashFound(true)};
-          if (character === "spiderman") {setSpidermanFound(true)}
+          if (character === "deadpool") {
+            
+            setDeadpoolCoordinates([boxCoordinates[0] - 12.5, boxCoordinates[1] - 12.5])
+          };
+          if (character === "flash") {
+            setFlashCoordinates([boxCoordinates[0] - 12.5, boxCoordinates[1] - 12.5])
+          };
+          if (character === "spiderman") {
+            setSpidermanCoordinates([boxCoordinates[0] - 12.5, boxCoordinates[1] - 12.5])
+          }
         }
         const targetingBox = document.querySelector(".targeting-box");
         setCoordinatePercentages(null);
@@ -74,23 +81,23 @@ function App() {
         <p style={{textAlign: "center"}}>Find all of them!</p>
         <div className="characters">
           <div style={{ position: "relative" }}>
-            <img src={deadpool} alt="deadpool" className="main-character-image" style={{ opacity: deadpoolFound && "50%" }}/>
+            <img src={deadpool} alt="deadpool" className="main-character-image" style={{ opacity: deadpoolCoordinates && "50%" }}/>
             <p className="character-name">Deadpool</p>
-            {deadpoolFound && 
+            {deadpoolCoordinates && 
               <img src={checkmark} alt="checkmark" className="checkmark" />
             }
           </div>
           <div style={{ position: "relative" }}>
-            <img src={flash} alt="flash" className="main-character-image" style={{ opacity: flashFound && "50%" }}/>
+            <img src={flash} alt="flash" className="main-character-image" style={{ opacity: flashCoordinates && "50%" }}/>
             <p className="character-name">Flash</p>
-            {flashFound && 
+            {flashCoordinates && 
               <img src={checkmark} alt="checkmark" className="checkmark" />
             }
           </div>
           <div style={{ position: "relative" }}>
-            <img src={spiderman} alt="spiderman" className="main-character-image" style={{ opacity: spidermanFound && "50%" }}/>
+            <img src={spiderman} alt="spiderman" className="main-character-image" style={{ opacity: spidermanCoordinates && "50%" }}/>
             <p className="character-name">Spiderman</p>
-            {spidermanFound && 
+            {spidermanCoordinates && 
               <img src={checkmark} alt="checkmark" className="checkmark" />
             }
           </div>
@@ -99,7 +106,7 @@ function App() {
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
         <dialog className="targeting-box" style={{ "top": boxCoordinates && `${boxCoordinates[1]}px`, "left": boxCoordinates && `${boxCoordinates[0]}px` }}>
-          {!deadpoolFound && 
+          {!deadpoolCoordinates && 
             <div>
               <button className="character-button" onClick={() => {handleCharacter("deadpool")}}>
                 <img src={deadpool} alt="deadpool" className="character-image"/>
@@ -107,7 +114,7 @@ function App() {
               <p className="character-name">Deadpool</p>
             </div>
           }
-          {!flashFound && 
+          {!flashCoordinates && 
             <div>
               <button className="character-button" onClick={() => {handleCharacter("flash")}}>
                 <img src={flash} alt="flash" className="character-image"/>
@@ -115,7 +122,7 @@ function App() {
               <p className="character-name">Flash</p>
             </div>
           }
-          {!spidermanFound &&
+          {!spidermanCoordinates &&
             <div>
               <button className="character-button" onClick={() => {handleCharacter("spiderman")}}>
                 <img src={spiderman} alt="spiderman" className="character-image"/>
@@ -126,6 +133,15 @@ function App() {
         </dialog>
         { boxCoordinates &&
           <span className="dot" style={{ "top": `calc(${boxCoordinates[1]}px - 12.5px)`, "left": `calc(${boxCoordinates[0]}px - 12.5px)` }}></span>
+        }
+        { deadpoolCoordinates &&
+          <span className="dot-green" style={{ "top": `${deadpoolCoordinates[1]}px`, "left": `${deadpoolCoordinates[0]}px` }}></span>
+        }
+        { flashCoordinates &&
+          <span className="dot-green" style={{ "top": `${flashCoordinates[1]}px`, "left": `${flashCoordinates[0]}px` }}></span>
+        }
+        { spidermanCoordinates &&
+          <span className="dot-green" style={{ "top": `${spidermanCoordinates[1]}px`, "left": `${spidermanCoordinates[0]}px` }}></span>
         }
 
       </main>
