@@ -17,6 +17,8 @@ function App() {
     const targetingBox = document.querySelector(".targeting-box");
 
     if (targetingBox.open) {
+      setCoordinatePercentages(null);
+      setBoxCoordinates(null);
       targetingBox.close();
     } else {
       const pictureContainer = document.querySelector(".picture-container");
@@ -57,6 +59,8 @@ function App() {
           if (character === "spiderman") {setSpidermanFound(true)}
         }
         const targetingBox = document.querySelector(".targeting-box");
+        setCoordinatePercentages(null);
+        setBoxCoordinates(null);
         targetingBox.close();
       })
       .catch(err => console.log(err));
@@ -120,7 +124,10 @@ function App() {
             </div>
           }
         </dialog>
-        <span className="dot" style={{ "top": boxCoordinates && `calc(${boxCoordinates[1]}px - 12.5px)`, "left": boxCoordinates && `calc(${boxCoordinates[0]}px - 12.5px)` }}></span>
+        { boxCoordinates &&
+          <span className="dot" style={{ "top": `calc(${boxCoordinates[1]}px - 12.5px)`, "left": `calc(${boxCoordinates[0]}px - 12.5px)` }}></span>
+        }
+
       </main>
 
     </>
