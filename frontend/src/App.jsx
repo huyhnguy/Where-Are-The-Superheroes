@@ -68,6 +68,8 @@ function App() {
           if (character === "flash") {setFlashFound(true)};
           if (character === "spiderman") {setSpidermanFound(true)}
         }
+        const targetingBox = document.querySelector(".targeting-box");
+        targetingBox.close();
       })
       .catch(err => console.log(err));
 
@@ -105,24 +107,30 @@ function App() {
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
         <dialog className="targeting-box" style={{ "top": boxCoordinates && `${boxCoordinates[1]}px`, "left": boxCoordinates && `${boxCoordinates[0]}px` }}>
-          <div>
-            <button className="character-button" onClick={() => {handleCharacter("deadpool")}}>
-              <img src={deadpool} alt="deadpool" className="character-image"/>
-            </button>
-            <p className="character-name">Deadpool</p>
-          </div>
-          <div>
-            <button className="character-button" onClick={() => {handleCharacter("flash")}}>
-              <img src={flash} alt="flash" className="character-image"/>
-            </button>
-            <p className="character-name">Flash</p>
-          </div>
-          <div>
-            <button className="character-button" onClick={() => {handleCharacter("spiderman")}}>
-              <img src={spiderman} alt="spiderman" className="character-image"/>
-            </button>
-            <p className="character-name">Spiderman</p>
-          </div>
+          {!deadpoolFound && 
+            <div>
+              <button className="character-button" onClick={() => {handleCharacter("deadpool")}}>
+                <img src={deadpool} alt="deadpool" className="character-image"/>
+              </button>
+              <p className="character-name">Deadpool</p>
+            </div>
+          }
+          {!flashFound && 
+            <div>
+              <button className="character-button" onClick={() => {handleCharacter("flash")}}>
+                <img src={flash} alt="flash" className="character-image"/>
+              </button>
+              <p className="character-name">Flash</p>
+            </div>
+          }
+          {!spidermanFound &&
+            <div>
+              <button className="character-button" onClick={() => {handleCharacter("spiderman")}}>
+                <img src={spiderman} alt="spiderman" className="character-image"/>
+              </button>
+              <p className="character-name">Spiderman</p>
+            </div>
+          }
         </dialog>
       </main>
 
