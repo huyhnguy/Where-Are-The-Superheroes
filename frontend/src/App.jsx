@@ -25,20 +25,6 @@ function App() {
       const topPosition = e.pageY - (pictureContainer.offsetTop);
       const xCoordinatePercentage = leftPosition / pictureDimensions.width;
       const yCoordinatePercentage = topPosition / pictureDimensions.height;
-
-
-
-      /*if (widthPercentage > 0.42 && widthPercentage < 0.44 && heightPercentage > 0.59 && heightPercentage < 0.63) {
-        console.log ("You found Flash!");
-      }
-  
-      if (widthPercentage > 0.73 && widthPercentage < 0.75 && heightPercentage > 0.72 && heightPercentage < 0.77) {
-        console.log ("You found Deadpool!");
-      }
-  
-      if (widthPercentage > 0.75 && widthPercentage < 0.77 && heightPercentage > 0.18 && heightPercentage < 0.21) {
-        console.log ("You found Spiderman!");
-      }*/
       setCoordinatePercentages([xCoordinatePercentage, yCoordinatePercentage]);
       setBoxCoordinates([leftPosition, topPosition]);
       targetingBox.show();
@@ -52,6 +38,8 @@ function App() {
       xCoordinatePercentage: coordinatePercentages[0],
       yCoordinatePercentage: coordinatePercentages[1],
     })
+
+    console.log(data);
 
     fetch(url, {
       method: 'POST',
@@ -132,6 +120,7 @@ function App() {
             </div>
           }
         </dialog>
+        <span className="dot"></span>
       </main>
 
     </>

@@ -13,9 +13,8 @@
 }
 
 .picture {
-  width: 95%;
+  width: 100%;
   display: block;
-  margin: 0 auto;
 }
 
 .title {
@@ -24,6 +23,8 @@
 
 .picture-container {
   position: relative;
+  width: 95%;
+  margin: 0 auto;
 }
 
 .targeting-box[open] {
@@ -82,5 +83,14 @@
 }
 
 .checkmark {
+  position: absolute;
+}
+
+.dot {
+  height: 25px;
+  width: 25px;
+  background-color: rgba(255, 0, 0, 0.5);
+  border-radius: 50%;
+  display: inline-block;
   position: absolute;
 }
