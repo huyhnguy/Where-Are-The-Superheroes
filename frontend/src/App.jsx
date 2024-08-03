@@ -2,11 +2,16 @@ import waldoPic from "./assets/wheres_waldo_pic.webp"
 import deadpool from "./assets/deadpool.jpg"
 import flash from "./assets/flash.jpg"
 import spiderman from "./assets/spiderman.jpg"
+import checkmark from "./assets/check-solid.svg"
 import "./index.css"
 import { useState } from "react";
 
 function App() {
-  const [coordinates, setCoordinates] = useState(null);
+  const [boxCoordinates, setBoxCoordinates] = useState(null);
+  const [coordinatePercentages, setCoordinatePercentages] = useState(null);
+  const [deadpoolFound, setDeadpoolFound] = useState(false);
+  const [flashFound, setFlashFound] = useState(false);
+  const [spidermanFound, setSpidermanFound] = useState(false);
 
   function handleClick(e) {
     const targetingBox = document.querySelector(".targeting-box");
@@ -18,10 +23,12 @@ function App() {
       const pictureDimensions = pictureContainer.getBoundingClientRect();
       const leftPosition = e.pageX - (pictureContainer.offsetLeft);
       const topPosition = e.pageY - (pictureContainer.offsetTop);
-      const widthPercentage = leftPosition / pictureDimensions.width;
-      const heightPercentage = topPosition / pictureDimensions.height;
+      const xCoordinatePercentage = leftPosition / pictureDimensions.width;
+      const yCoordinatePercentage = topPosition / pictureDimensions.height;
 
-      if (widthPercentage > 0.42 && widthPercentage < 0.44 && heightPercentage > 0.59 && heightPercentage < 0.63) {
+
+
+      /*if (widthPercentage > 0.42 && widthPercentage < 0.44 && heightPercentage > 0.59 && heightPercentage < 0.63) {
         console.log ("You found Flash!");
       }
   
@@ -31,11 +38,39 @@ function App() {
   
       if (widthPercentage > 0.75 && widthPercentage < 0.77 && heightPercentage > 0.18 && heightPercentage < 0.21) {
         console.log ("You found Spiderman!");
-      }
-
-      setCoordinates([leftPosition, topPosition]);
+      }*/
+      setCoordinatePercentages([xCoordinatePercentage, yCoordinatePercentage]);
+      setBoxCoordinates([leftPosition, topPosition]);
       targetingBox.show();
     }
+  }
+
+  function handleCharacter(character) {
+    const url = 'http://localhost:3000/api/characters/' + character;
+
+    const data = JSON.stringify({
+      xCoordinatePercentage: coordinatePercentages[0],
+      yCoordinatePercentage: coordinatePercentages[1],
+    })
+
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: data,
+    })
+      .then(res => res.json())
+      .then(data => {
+        if (data.message === "Pass") {
+          if (character === "deadpool") {setDeadpoolFound(true)};
+          if (character === "flash") {setFlashFound(true)};
+          if (character === "spiderman") {setSpidermanFound(true)}
+        }
+      })
+      .catch(err => console.log(err));
+
   }
 
   return (
@@ -44,37 +79,46 @@ function App() {
       <section style={{ margin: "1rem"}}>
         <p style={{textAlign: "center"}}>Find all of them!</p>
         <div className="characters">
-          <div >
-            <img src={deadpool} alt="deadpool" className="main-character-image"/>
+          <div style={{ position: "relative" }}>
+            <img src={deadpool} alt="deadpool" className="main-character-image" style={{ opacity: deadpoolFound && "50%" }}/>
             <p className="character-name">Deadpool</p>
+            {deadpoolFound && 
+              <img src={checkmark} alt="checkmark" className="checkmark" />
+            }
           </div>
-          <div>
-            <img src={flash} alt="flash" className="main-character-image"/>
+          <div style={{ position: "relative" }}>
+            <img src={flash} alt="flash" className="main-character-image" style={{ opacity: flashFound && "50%" }}/>
             <p className="character-name">Flash</p>
+            {flashFound && 
+              <img src={checkmark} alt="checkmark" className="checkmark" />
+            }
           </div>
-          <div>
-            <img src={spiderman} alt="spiderman" className="main-character-image"/>
+          <div style={{ position: "relative" }}>
+            <img src={spiderman} alt="spiderman" className="main-character-image" style={{ opacity: spidermanFound && "50%" }}/>
             <p className="character-name">Spiderman</p>
+            {spidermanFound && 
+              <img src={checkmark} alt="checkmark" className="checkmark" />
+            }
           </div>
         </div>
       </section>
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
-        <dialog className="targeting-box" style={{ "top": coordinates && `${coordinates[1]}px`, "left": coordinates && `${coordinates[0]}px` }}>
+        <dialog className="targeting-box" style={{ "top": boxCoordinates && `${boxCoordinates[1]}px`, "left": boxCoordinates && `${boxCoordinates[0]}px` }}>
           <div>
-            <button className="character-button">
+            <button className="character-button" onClick={() => {handleCharacter("deadpool")}}>
               <img src={deadpool} alt="deadpool" className="character-image"/>
             </button>
             <p className="character-name">Deadpool</p>
           </div>
           <div>
-            <button className="character-button">
+            <button className="character-button" onClick={() => {handleCharacter("flash")}}>
               <img src={flash} alt="flash" className="character-image"/>
             </button>
             <p className="character-name">Flash</p>
           </div>
           <div>
-            <button className="character-button">
+            <button className="character-button" onClick={() => {handleCharacter("spiderman")}}>
               <img src={spiderman} alt="spiderman" className="character-image"/>
             </button>
             <p className="character-name">Spiderman</p>
