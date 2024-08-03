@@ -2,7 +2,7 @@ import waldoPic from "./assets/wheres_waldo_pic.webp"
 import deadpool from "./assets/deadpool.jpg"
 import flash from "./assets/flash.jpg"
 import spiderman from "./assets/spiderman.jpg"
-import checkmark from "./assets/check-solid.svg"
+import checkmark from "./assets/circle-check-regular.svg"
 import "./index.css"
 import { useState } from "react";
 
