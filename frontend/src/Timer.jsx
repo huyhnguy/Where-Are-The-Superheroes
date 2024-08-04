@@ -18,10 +18,7 @@ export default function Timer({ isRunning }) {
 
 
     return (
-        <>
-            <p className="timer">{format(time)}</p>
-        </>
-
+        <p className="timer">{format(time)}</p>
     )
 }
 

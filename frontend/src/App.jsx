@@ -6,6 +6,7 @@ import checkmark from "./assets/circle-check-regular.svg"
 import "./index.css"
 import { useState } from "react";
 import Timer from "./Timer"
+import ScoreboardPopup from "./ScoreboardPopup"
 
 function App() {
   const [boxCoordinates, setBoxCoordinates] = useState(null);
@@ -42,8 +43,6 @@ function App() {
       yCoordinatePercentage: coordinatePercentages[1],
     })
 
-    console.log(data);
-
     fetch(url, {
       method: 'POST',
       headers: {
@@ -65,12 +64,14 @@ function App() {
             setSpidermanCoordinates([boxCoordinates[0] - 12.5, boxCoordinates[1] - 12.5])
           }
         }
-        const targetingBox = document.querySelector(".targeting-box");
-        setCoordinatePercentages(null);
-        setBoxCoordinates(null);
-        targetingBox.close();
+
       })
       .catch(err => console.log(err));
+
+      const targetingBox = document.querySelector(".targeting-box");
+      setCoordinatePercentages(null);
+      setBoxCoordinates(null);
+      targetingBox.close();
 
   }
 
@@ -146,6 +147,9 @@ function App() {
         }
 
       </main>
+      { deadpoolCoordinates && flashCoordinates && spidermanCoordinates &&
+        <ScoreboardPopup />
+      }
 
     </>
   )
