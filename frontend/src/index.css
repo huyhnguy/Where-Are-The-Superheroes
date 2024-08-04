@@ -89,7 +89,7 @@
 .dot {
   height: 25px;
   width: 25px;
-  background-color: rgba(255, 0, 0, 0.5);
+  background-color: rgba(255, 0, 0, 0.75);
   border-radius: 50%;
   display: inline-block;
   position: absolute;
@@ -98,8 +98,12 @@
 .dot-green {
   height: 25px;
   width: 25px;
-  background-color: rgba(0, 255, 0, 0.77);
+  background-color: rgba(0, 255, 0, 0.75);
   border-radius: 50%;
   display: inline-block;
   position: absolute;
+}
+
+.timer {
+  text-align: center;
 }

@@ -5,6 +5,7 @@ import spiderman from "./assets/spiderman.jpg"
 import checkmark from "./assets/circle-check-regular.svg"
 import "./index.css"
 import { useState } from "react";
+import Timer from "./Timer"
 
 function App() {
   const [boxCoordinates, setBoxCoordinates] = useState(null);
@@ -55,7 +56,6 @@ function App() {
       .then(data => {
         if (data.message === "Pass") {
           if (character === "deadpool") {
-            
             setDeadpoolCoordinates([boxCoordinates[0] - 12.5, boxCoordinates[1] - 12.5])
           };
           if (character === "flash") {
@@ -102,6 +102,7 @@ function App() {
             }
           </div>
         </div>
+        { spidermanCoordinates && flashCoordinates && deadpoolCoordinates ? <Timer isRunning={false} /> : <Timer isRunning={true}/>}
       </section>
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
