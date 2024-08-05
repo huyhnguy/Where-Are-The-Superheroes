@@ -7,6 +7,7 @@ import "./index.css"
 import { useState } from "react";
 import Timer from "./Timer"
 import ScoreboardPopup from "./ScoreboardPopup"
+import Scoreboard from "./Scoreboard"
 
 function App() {
   const [boxCoordinates, setBoxCoordinates] = useState(null);
@@ -147,9 +148,8 @@ function App() {
         }
 
       </main>
-      { deadpoolCoordinates && flashCoordinates && spidermanCoordinates &&
-        <ScoreboardPopup />
-      }
+      <ScoreboardPopup openPopup={deadpoolCoordinates && flashCoordinates && spidermanCoordinates ? true : false}/>
+      <Scoreboard />
 
     </>
   )

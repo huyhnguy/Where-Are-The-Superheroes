@@ -1,4 +1,6 @@
-export default function ScoreboardPopup() {
+export default function ScoreboardPopup({openPopup}) {
+
+
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -19,18 +21,27 @@ export default function ScoreboardPopup() {
             body: data,
           })
             .then(res => res.json())
-            .then(data => console.log(data.message))
+            .then(data => {
+                if (data.message === "Score saved") {
+                    document.querySelector(".scoreboard-popup").close();
+                    console.log(data.message);
+                }
+            })
             .catch(err => console.log(err));
     }
 
+    
+
     return(
-        <dialog className="scoreboard-popup" open>
-            <p>Put your score on the scoreboard!</p>
-            <form action="" method="POST">
-            <label htmlFor="name">Name</label>
-            <input type="text" name="name" id="name" required />
-            <input type="submit" value="submit" onClick={handleSubmit}/>
-            </form>
-        </dialog>
+        <div className="popup-container" style={{zIndex : openPopup ? 10 : -1}}>
+            <dialog className="scoreboard-popup" open={openPopup}>
+                <p>Put your score on the scoreboard!</p>
+                <form action="" method="POST">
+                <label htmlFor="name">Name</label>
+                <input type="text" name="name" id="name" required />
+                <input type="submit" value="submit" onClick={handleSubmit}/>
+                </form>
+            </dialog>
+        </div>
     )
 }
