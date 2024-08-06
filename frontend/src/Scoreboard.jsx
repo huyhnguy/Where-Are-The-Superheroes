@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import xMark from "./assets/xmark.svg"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
+
 
 export default function Scoreboard() {
     const [scores, setScores] = useState(null)
@@ -46,8 +48,8 @@ export default function Scoreboard() {
         <div className="popup-container" style={{zIndex : 10}}>
             <dialog open className="scoreboard">
                 <h2 className="title">Scoreboard</h2>
-                <button className="close" onClick={handleClose}>
-                    <img src={xMark} alt="close scoreboard" style={{height: "1.5rem"}}/>
+                <button className="close" onClick={handleClose} style={{ cursor: "pointer"}}>
+                    <FontAwesomeIcon icon={faCircleXmark} style={{ height: "1.5rem"}}/>
                 </button>
                 { scores &&
                     <ol>

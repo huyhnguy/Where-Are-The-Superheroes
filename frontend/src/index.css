@@ -135,3 +135,7 @@
 .scoreboard {
   position: relative;
 }
+
+.close:hover {
+  color: red;
+}
