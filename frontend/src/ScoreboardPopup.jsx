@@ -1,4 +1,4 @@
-export default function ScoreboardPopup({openPopup}) {
+export default function ScoreboardPopup({openPopup, submitScoreFunction }) {
 
 
     function handleSubmit(e) {
@@ -6,10 +6,14 @@ export default function ScoreboardPopup({openPopup}) {
 
         const name = document.getElementById("name").value;
         const time = document.querySelector(".timer").textContent;
+        const timeArray = time.split(":");
+        const minutes = Number(timeArray[0]);
+        const seconds = Number(timeArray[1]);
+        const duration = minutes * 60 + seconds;
 
         const data = JSON.stringify({
             name: name,
-            time: time,
+            time: duration,
         });
 
         fetch('http://localhost:3000/api/scoreboard/score', {
@@ -24,10 +28,13 @@ export default function ScoreboardPopup({openPopup}) {
             .then(data => {
                 if (data.message === "Score saved") {
                     document.querySelector(".scoreboard-popup").close();
+                    document.querySelector(".scoreboard").show();
                     console.log(data.message);
                 }
             })
             .catch(err => console.log(err));
+
+        submitScoreFunction();
     }
 
     

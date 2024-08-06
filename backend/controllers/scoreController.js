@@ -14,7 +14,6 @@ exports.score = asyncHandler(async (req, res, next) => {
 });
 
 exports.scoreboard = asyncHandler(async (req, res, next) => {
-    const scoreboard = await Score.find().exec();
-    console.log(scoreboard);
+    const scoreboard = await Score.find().sort({"time": 1}).exec();
     res.json(scoreboard);
 })

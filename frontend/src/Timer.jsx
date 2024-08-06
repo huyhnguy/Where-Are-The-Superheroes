@@ -23,7 +23,7 @@ export default function Timer({ isRunning }) {
 }
 
 const format = (time) => {
-    let minutes = Math.floor(time / 60 / 60);
+    let minutes = Math.floor(time / 60);
     let seconds = Math.floor(time % 60);
 
     minutes = minutes < 10 ? '0' + minutes : minutes;

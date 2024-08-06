@@ -119,3 +119,19 @@
   right: 0;
   top: 0;
 }
+
+.scoreboard .title {
+  text-align: center;
+}
+
+.scoreboard .close {
+  all: unset;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 10px;
+}
+
+.scoreboard {
+  position: relative;
+}

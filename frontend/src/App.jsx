@@ -6,8 +6,8 @@ import checkmark from "./assets/circle-check-regular.svg"
 import "./index.css"
 import { useState } from "react";
 import Timer from "./Timer"
-import ScoreboardPopup from "./ScoreboardPopup"
 import Scoreboard from "./Scoreboard"
+import ScoreboardPopup from "./ScoreboardPopup"
 
 function App() {
   const [boxCoordinates, setBoxCoordinates] = useState(null);
@@ -15,6 +15,7 @@ function App() {
   const [deadpoolCoordinates, setDeadpoolCoordinates] = useState(null);
   const [flashCoordinates, setFlashCoordinates] = useState(null);
   const [spidermanCoordinates, setSpidermanCoordinates] = useState(null);
+  const [scoreSubmitted, setScoreSubmitted] = useState(false);
 
   function handleClick(e) {
     const targetingBox = document.querySelector(".targeting-box");
@@ -74,6 +75,10 @@ function App() {
       setBoxCoordinates(null);
       targetingBox.close();
 
+  }
+
+  function submitScore() {
+    setScoreSubmitted(true);
   }
 
   return (
@@ -148,8 +153,11 @@ function App() {
         }
 
       </main>
-      <ScoreboardPopup openPopup={deadpoolCoordinates && flashCoordinates && spidermanCoordinates ? true : false}/>
-      <Scoreboard />
+      <ScoreboardPopup openPopup={deadpoolCoordinates && flashCoordinates && spidermanCoordinates ? true : false} submitScoreFunction={submitScore}/>
+
+      {scoreSubmitted &&       
+        <Scoreboard />
+      } 
 
     </>
   )
