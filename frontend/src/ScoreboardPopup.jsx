@@ -1,5 +1,7 @@
-export default function ScoreboardPopup({openPopup, submitScoreFunction }) {
+import { useNavigate } from "react-router-dom";
 
+export default function ScoreboardPopup() {
+    const navigate = useNavigate();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -27,19 +29,20 @@ export default function ScoreboardPopup({openPopup, submitScoreFunction }) {
             .then(res => res.json())
             .then(data => {
                 if (data.message === "Score saved") {
-                    document.querySelector(".scoreboard-popup").close();
-                    document.querySelector(".scoreboard").show();
+                    /*document.querySelector(".scoreboard-popup").close();
+                    document.querySelector(".scoreboard").show();*/
                     console.log(data.message);
+                    localStorage.setItem("scoreId", data.id);
+                    navigate("/scoreboard");
                 }
             })
             .catch(err => console.log(err));
 
-        submitScoreFunction();
     }
 
     
 
-    return(
+    /*return(
         <div className="popup-container" style={{zIndex : openPopup ? 10 : -1}}>
             <dialog className="scoreboard-popup" open={openPopup}>
                 <p>Put your score on the scoreboard!</p>
@@ -49,6 +52,17 @@ export default function ScoreboardPopup({openPopup, submitScoreFunction }) {
                 <input type="submit" value="submit" onClick={handleSubmit}/>
                 </form>
             </dialog>
+        </div>
+    )*/
+
+    return(
+        <div className="scoreboard-popup" >
+            <p style={{marginTop: "0", textAlign: "center", fontSize: "1.25rem"}}>Put your score on the scoreboard!</p>
+            <form action="" method="POST">
+                <label htmlFor="name">Name</label>
+                <input type="text" name="name" id="name" required />
+                <input type="submit" value="Submit" onClick={handleSubmit}/>
+            </form>
         </div>
     )
 }

@@ -1,10 +1,9 @@
-import { useEffect, useState } from "react";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleXmark } from '@fortawesome/free-regular-svg-icons'
-
+import { useEffect, useState, useRef } from "react";
+import Replay from "./Replay";
 
 export default function Scoreboard() {
-    const [scores, setScores] = useState(null)
+    const [scores, setScores] = useState(null);
+    const refContainer = useRef(null);
 
     useEffect(() => {
         fetch('http://localhost:3000/api/scoreboard', {
@@ -19,7 +18,19 @@ export default function Scoreboard() {
                 setScores(data);
             })
             .catch(err => console.log(err));
+
+
     }, [])
+
+    useEffect(() => { 
+        if (refContainer.current) {
+            refContainer.current.scrollIntoView({ 
+                behavior: "smooth",
+                block: 'center',
+                inline: 'center'
+            }); 
+        }
+    })
 
     function formatTime(time) {
         let formattedMinutes;
@@ -40,24 +51,43 @@ export default function Scoreboard() {
         return formattedSeconds
     }
 
-    function handleClose() {
-        document.querySelector(".scoreboard").close();
-    }
-
     return(
-        <div className="popup-container" style={{zIndex : 10}}>
-            <dialog open className="scoreboard">
-                <h2 className="title">Scoreboard</h2>
-                <button className="close" onClick={handleClose} style={{ cursor: "pointer"}}>
-                    <FontAwesomeIcon icon={faCircleXmark} style={{ height: "1.5rem"}}/>
-                </button>
-                { scores &&
-                    <ol>
-                        {scores.map(score => <li key={score._id}>{score.name} | {formatTime(score.time)}</li>)}
-                    </ol>
-                }
-            </dialog>
-        </div>
+            <>
+                <main className="scoreboard">
+                    <h1 className="title">Scoreboard</h1>
+                    { scores &&
+                        <div className="scoreboard-grid">
+                            <h2>Rank</h2>
+                            <h2>Time</h2>
+                            <h2>Name</h2>
+                            {scores.map((score, index) => {
+                                const scoreId = localStorage.getItem("scoreId");
+                                if (score._id === scoreId) {
+                                    return (
+                                        <>
+                                            <p ref={refContainer}><strong>{index + 1}.</strong></p>
+                                            <p><strong>{formatTime(score.time)}</strong></p>
+                                            <p className="name"><strong>{score.name}</strong></p>
+                                        </>
+                                    )
+                                } else {
+                                    return (
+                                        <>
+                                            <p>{index + 1}.</p>
+                                            <p>{formatTime(score.time)}</p>
+                                            <p className="name">{score.name}</p>
+                                        </>
+                                    )
+                                }
+                            }
+
+                            )}
+                        </div>
+                    }
+                </main>
+                <Replay />
+            </>
+            
 
     )
 }

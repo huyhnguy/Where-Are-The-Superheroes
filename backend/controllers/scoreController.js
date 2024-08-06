@@ -9,8 +9,12 @@ exports.score = asyncHandler(async (req, res, next) => {
 
     await score.save();
 
-    res.send({message: "Score saved"});
+    const scoreDb = await Score.findOne({ name: score.name }).exec();
 
+    res.send({
+        id: scoreDb._id,
+        message: "Score saved"
+    });
 });
 
 exports.scoreboard = asyncHandler(async (req, res, next) => {
