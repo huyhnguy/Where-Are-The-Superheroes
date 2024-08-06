@@ -8,6 +8,8 @@ import { useState } from "react";
 import Timer from "./Timer"
 import Scoreboard from "./Scoreboard"
 import ScoreboardPopup from "./ScoreboardPopup"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons'
 
 function App() {
   const [boxCoordinates, setBoxCoordinates] = useState(null);
@@ -83,29 +85,28 @@ function App() {
 
   return (
     <>
-      <h1 className="title">Where Are The Superheroes?</h1>
-      <section style={{ margin: "1rem"}}>
-        <p style={{textAlign: "center"}}>Find all of them!</p>
+      <h1 className="title">Where Are These Superheroes?</h1>
+      <section className="header">
         <div className="characters">
           <div style={{ position: "relative" }}>
             <img src={deadpool} alt="deadpool" className="main-character-image" style={{ opacity: deadpoolCoordinates && "50%" }}/>
             <p className="character-name">Deadpool</p>
             {deadpoolCoordinates && 
-              <img src={checkmark} alt="checkmark" className="checkmark" />
+              <FontAwesomeIcon icon={faCircleCheck} beat className="checkmark" />
             }
           </div>
           <div style={{ position: "relative" }}>
             <img src={flash} alt="flash" className="main-character-image" style={{ opacity: flashCoordinates && "50%" }}/>
             <p className="character-name">Flash</p>
             {flashCoordinates && 
-              <img src={checkmark} alt="checkmark" className="checkmark" />
+              <FontAwesomeIcon icon={faCircleCheck} beat className="checkmark" />
             }
           </div>
           <div style={{ position: "relative" }}>
             <img src={spiderman} alt="spiderman" className="main-character-image" style={{ opacity: spidermanCoordinates && "50%" }}/>
             <p className="character-name">Spiderman</p>
             {spidermanCoordinates && 
-              <img src={checkmark} alt="checkmark" className="checkmark" />
+              <FontAwesomeIcon icon={faCircleCheck} beat className="checkmark" />
             }
           </div>
         </div>

@@ -12,19 +12,38 @@
   font-family: "Montserrat", sans-serif;
 }
 
+body {
+  margin: 0;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  background: white;
+  border-bottom: solid;
+  padding: 1rem;
+}
+
 .picture {
   width: 100%;
   display: block;
+  border-radius: 1rem;
+  border: solid 3px;
 }
 
 .title {
   text-align: center;
+  margin-bottom: 0;
 }
 
 .picture-container {
   position: relative;
   width: 95%;
-  margin: 0 auto;
+  margin: 1rem auto;
 }
 
 .targeting-box[open] {
@@ -48,8 +67,8 @@
 
 .character-button {
   border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   padding: 0;
   border: 3px solid;
   cursor: pointer;
@@ -69,8 +88,8 @@
 
 .main-character-image {
   border-radius: 50%;
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   object-fit: cover;
   border: 3px solid;
 }
@@ -84,6 +103,24 @@
 
 .checkmark {
   position: absolute;
+  height: 4.5rem;
+  --fa-animation-iteration-count: 1;
+  color: #00ff00;
+}
+
+@keyframes grow {
+  0% {
+    transform:scale(1);
+  }
+
+  50% {
+    transform: scale(1.25);
+  }
+
+  100%{
+    transform: scale(1);
+  }
+  
 }
 
 .dot {
@@ -106,6 +143,7 @@
 
 .timer {
   text-align: center;
+  font-size: 2rem;
 }
 
 .popup-container {
