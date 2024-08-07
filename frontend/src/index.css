@@ -16,16 +16,29 @@ body {
   margin: 0;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: sticky;
+.sticky-header {
+  position: fixed;
   top: 0;
   z-index: 9;
   background: white;
-  border-bottom: solid;
   padding: 1rem;
+  border-radius: 0 0 1rem 0;
+  border-bottom: solid;
+  border-right: solid;
+}
+
+.first-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.second-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
 }
 
 .picture {
@@ -35,9 +48,16 @@ body {
   border: solid 3px;
 }
 
-.title {
+.first-row .title {
   text-align: center;
-  margin-bottom: 0;
+  margin: 0;
+  font-size: 1rem;
+}
+
+.minimize {
+  all: unset;
+  cursor: pointer;
+  color: black;
 }
 
 .picture-container {
@@ -144,6 +164,8 @@ body {
 .timer {
   text-align: center;
   font-size: 2rem;
+  margin: 0;
+  min-width: 100px;
 }
 
 .popup-container {

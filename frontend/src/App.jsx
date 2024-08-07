@@ -8,6 +8,9 @@ import Timer from "./Timer"
 import ScoreboardPopup from "./ScoreboardPopup"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons'
+import { faDownLeftAndUpRightToCenter } from '@fortawesome/free-solid-svg-icons'
+import StickyHeader from "./StickyHeader"
+
 
 function App() {
   const [boxCoordinates, setBoxCoordinates] = useState(null);
@@ -78,33 +81,7 @@ function App() {
 
   return (
     <>
-      <h1 className="title">Where Are These Superheroes?</h1>
-      <section className="header">
-        <div className="characters">
-          <div style={{ position: "relative" }}>
-            <img src={deadpool} alt="deadpool" className="main-character-image" style={{ opacity: deadpoolCoordinates && "50%" }}/>
-            <p className="character-name">Deadpool</p>
-            {deadpoolCoordinates && 
-              <FontAwesomeIcon icon={faCircleCheck} beat className="checkmark" />
-            }
-          </div>
-          <div style={{ position: "relative" }}>
-            <img src={flash} alt="flash" className="main-character-image" style={{ opacity: flashCoordinates && "50%" }}/>
-            <p className="character-name">Flash</p>
-            {flashCoordinates && 
-              <FontAwesomeIcon icon={faCircleCheck} beat className="checkmark" />
-            }
-          </div>
-          <div style={{ position: "relative" }}>
-            <img src={spiderman} alt="spiderman" className="main-character-image" style={{ opacity: spidermanCoordinates && "50%" }}/>
-            <p className="character-name">Spiderman</p>
-            {spidermanCoordinates && 
-              <FontAwesomeIcon icon={faCircleCheck} beat className="checkmark" />
-            }
-          </div>
-        </div>
-        { spidermanCoordinates && flashCoordinates && deadpoolCoordinates ? <Timer isRunning={false} /> : <Timer isRunning={true}/>}
-      </section>
+      <StickyHeader deadpoolCoordinates={deadpoolCoordinates} flashCoordinates={flashCoordinates} spidermanCoordinates={spidermanCoordinates}/>
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
         <dialog className="targeting-box" style={{ "top": boxCoordinates && `${boxCoordinates[1]}px`, "left": boxCoordinates && `${boxCoordinates[0]}px` }}>
