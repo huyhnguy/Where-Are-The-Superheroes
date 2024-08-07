@@ -31,6 +31,7 @@ function App() {
       const yCoordinatePercentage = topPosition / pictureDimensions.height;
       setCoordinatePercentages([xCoordinatePercentage, yCoordinatePercentage]);
       setBoxCoordinates([leftPosition, topPosition]);
+      console.log([xCoordinatePercentage, yCoordinatePercentage]);
     }
   }
 

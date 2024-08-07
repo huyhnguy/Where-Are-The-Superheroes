@@ -38,8 +38,8 @@ async function characterCreate(index, name, xmin, xmax, ymin, ymax) {
 async function createCharacters() {
     console.log('adding all characters');
     await Promise.all([
-        characterCreate(0, "Deadpool", 0.74, 0.76, 0.72, 0.77),
-        characterCreate(1, "Flash", 0.42, 0.44, 0.59, 0.63),
-        characterCreate(2, "Spiderman", 0.76, 0.78, 0.18, 0.21),
+        characterCreate(0, "Deadpool", 0.74, 0.77, 0.72, 0.78),
+        characterCreate(1, "Flash", 0.42, 0.44, 0.58, 0.64),
+        characterCreate(2, "Spiderman", 0.76, 0.79, 0.18, 0.22),
     ])
 }
