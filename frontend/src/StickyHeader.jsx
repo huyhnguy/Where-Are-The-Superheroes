@@ -23,7 +23,7 @@ export default function StickyHeader({ deadpoolCoordinates, flashCoordinates, sp
         <section className="sticky-header">
         <div className="first-row">
           <h1 className="title">Where Are These Superheroes?</h1>
-          { !minimize ? 
+          { minimize ? 
             <button className="minimize" onClick={handleMinimize}>
                 <FontAwesomeIcon icon={faUpRightAndDownLeftFromCenter} />
             </button>
@@ -33,7 +33,7 @@ export default function StickyHeader({ deadpoolCoordinates, flashCoordinates, sp
             </button>
           }
         </div>
-        <div className="second-row" style={{ visibility: !minimize && "hidden", position: !minimize && "absolute" }}>
+        <div className="second-row" style={{ visibility: minimize && "hidden", position: minimize && "absolute" }}>
             <div className="characters">
             <div style={{ position: "relative" }}>
                 <img src={deadpool} alt="deadpool" className="main-character-image" style={{ opacity: deadpoolCoordinates && "50%" }}/>

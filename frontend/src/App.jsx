@@ -4,10 +4,8 @@ import flash from "./assets/flash.jpg"
 import spiderman from "./assets/spiderman.jpg"
 import "./index.css"
 import { useState } from "react";
-import Timer from "./Timer"
 import ScoreboardPopup from "./ScoreboardPopup"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleCheck } from '@fortawesome/free-regular-svg-icons'
 import { faDownLeftAndUpRightToCenter } from '@fortawesome/free-solid-svg-icons'
 import StickyHeader from "./StickyHeader"
 
@@ -20,12 +18,10 @@ function App() {
   const [spidermanCoordinates, setSpidermanCoordinates] = useState(null);
 
   function handleClick(e) {
-    const targetingBox = document.querySelector(".targeting-box");
-
-    if (targetingBox.open) {
+    if (boxCoordinates) {
       setCoordinatePercentages(null);
       setBoxCoordinates(null);
-      targetingBox.close();
+
     } else {
       const pictureContainer = document.querySelector(".picture-container");
       const pictureDimensions = pictureContainer.getBoundingClientRect();
@@ -35,7 +31,6 @@ function App() {
       const yCoordinatePercentage = topPosition / pictureDimensions.height;
       setCoordinatePercentages([xCoordinatePercentage, yCoordinatePercentage]);
       setBoxCoordinates([leftPosition, topPosition]);
-      targetingBox.show();
     }
   }
 
@@ -84,32 +79,35 @@ function App() {
       <StickyHeader deadpoolCoordinates={deadpoolCoordinates} flashCoordinates={flashCoordinates} spidermanCoordinates={spidermanCoordinates}/>
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
-        <dialog className="targeting-box" style={{ "top": boxCoordinates && `${boxCoordinates[1]}px`, "left": boxCoordinates && `${boxCoordinates[0]}px` }}>
-          {!deadpoolCoordinates && 
-            <div>
-              <button className="character-button" onClick={() => {handleCharacter("deadpool")}}>
-                <img src={deadpool} alt="deadpool" className="character-image"/>
-              </button>
-              <p className="character-name">Deadpool</p>
-            </div>
-          }
-          {!flashCoordinates && 
-            <div>
-              <button className="character-button" onClick={() => {handleCharacter("flash")}}>
-                <img src={flash} alt="flash" className="character-image"/>
-              </button>
-              <p className="character-name">Flash</p>
-            </div>
-          }
-          {!spidermanCoordinates &&
-            <div>
-              <button className="character-button" onClick={() => {handleCharacter("spiderman")}}>
-                <img src={spiderman} alt="spiderman" className="character-image"/>
-              </button>
-              <p className="character-name">Spiderman</p>
-            </div>
-          }
-        </dialog>
+        { boxCoordinates &&
+          <dialog className="targeting-box" open style={{ "top": boxCoordinates && `${boxCoordinates[1]}px`, "left": boxCoordinates && `${boxCoordinates[0]}px` }}>
+            {!deadpoolCoordinates && 
+              <div>
+                <button className="character-button" onClick={() => {handleCharacter("deadpool")}}>
+                  <img src={deadpool} alt="deadpool" className="character-image"/>
+                </button>
+                <p className="character-name">Deadpool</p>
+              </div>
+            }
+            {!flashCoordinates && 
+              <div>
+                <button className="character-button" onClick={() => {handleCharacter("flash")}}>
+                  <img src={flash} alt="flash" className="character-image"/>
+                </button>
+                <p className="character-name">Flash</p>
+              </div>
+            }
+            {!spidermanCoordinates &&
+              <div>
+                <button className="character-button" onClick={() => {handleCharacter("spiderman")}}>
+                  <img src={spiderman} alt="spiderman" className="character-image"/>
+                </button>
+                <p className="character-name">Spiderman</p>
+              </div>
+            }
+          </dialog>
+        }
+
         { boxCoordinates &&
           <span className="dot" style={{ "top": `calc(${boxCoordinates[1]}px - 12.5px)`, "left": `calc(${boxCoordinates[0]}px - 12.5px)` }}></span>
         }

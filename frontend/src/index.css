@@ -21,7 +21,7 @@ body {
   top: 0;
   z-index: 9;
   background: white;
-  padding: 1rem;
+  padding: 0.5rem;
   border-radius: 0 0 1rem 0;
   border-bottom: solid;
   border-right: solid;
@@ -63,13 +63,16 @@ body {
 .picture-container {
   position: relative;
   width: 95%;
-  margin: 1rem auto;
+  margin: 3rem auto;
 }
 
 .targeting-box[open] {
   position: absolute;
   margin: 0;
+  padding: 0.5rem;
   display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   border-radius: 1rem;
   border: none;
