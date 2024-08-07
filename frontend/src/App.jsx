@@ -6,7 +6,7 @@ import "./index.css"
 import { useState } from "react";
 import ScoreboardPopup from "./ScoreboardPopup"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownLeftAndUpRightToCenter } from '@fortawesome/free-solid-svg-icons'
+import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import StickyHeader from "./StickyHeader"
 
 
@@ -16,12 +16,12 @@ function App() {
   const [deadpoolCoordinates, setDeadpoolCoordinates] = useState(null);
   const [flashCoordinates, setFlashCoordinates] = useState(null);
   const [spidermanCoordinates, setSpidermanCoordinates] = useState(null);
+  const [fail, setFail] = useState(false);
 
   function handleClick(e) {
     if (boxCoordinates) {
       setCoordinatePercentages(null);
       setBoxCoordinates(null);
-
     } else {
       const pictureContainer = document.querySelector(".picture-container");
       const pictureDimensions = pictureContainer.getBoundingClientRect();
@@ -62,6 +62,8 @@ function App() {
           if (character === "spiderman") {
             setSpidermanCoordinates([boxCoordinates[0] - 12.5, boxCoordinates[1] - 12.5])
           }
+        } else {
+          setFail(boxCoordinates);
         }
 
       })
@@ -80,7 +82,7 @@ function App() {
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
         { boxCoordinates &&
-          <dialog className="targeting-box" open style={{ "top": boxCoordinates && `${boxCoordinates[1]}px`, "left": boxCoordinates && `${boxCoordinates[0]}px` }}>
+          <dialog className="targeting-box" open style={{ "top": `${boxCoordinates[1]}px`, "left": `${boxCoordinates[0]}px` }}>
             {!deadpoolCoordinates && 
               <div>
                 <button className="character-button" onClick={() => {handleCharacter("deadpool")}}>
@@ -107,7 +109,9 @@ function App() {
             }
           </dialog>
         }
-
+        { fail && 
+          <FontAwesomeIcon icon={faXmark} className="fail-mark" style={{"top": `calc(${fail[1]}px - 12.5px)`, "left": `calc(${fail[0]}px - 12.5px)`}}/>
+        }
         { boxCoordinates &&
           <span className="dot" style={{ "top": `calc(${boxCoordinates[1]}px - 12.5px)`, "left": `calc(${boxCoordinates[0]}px - 12.5px)` }}></span>
         }

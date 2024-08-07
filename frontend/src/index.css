@@ -66,6 +66,14 @@ body {
   margin: 3rem auto;
 }
 
+.fail-mark {
+  color: red;
+  height: 25px;
+  width: 25px;
+  position: absolute;
+  pointer-events: none;
+}
+
 .targeting-box[open] {
   position: absolute;
   margin: 0;
@@ -79,6 +87,7 @@ body {
   --mask: radial-gradient(20px at 0 0,#0000 98%,#000);
   -webkit-mask: var(--mask);
           mask: var(--mask);
+  z-index: 1;
 }
 
 .targeting-box div, 
