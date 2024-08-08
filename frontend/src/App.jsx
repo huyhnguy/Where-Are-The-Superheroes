@@ -10,6 +10,9 @@ import { faCircleCheck } from '@fortawesome/free-regular-svg-icons'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import StickyHeader from "./StickyHeader"
 import Hint from "./Hint"
+import correct from "./assets/audio/correct.mp3"
+import incorrect from "./assets/audio/incorrect.mp3"
+import win from "./assets/audio/win.wav"
 
 
 function App() {
@@ -127,24 +130,54 @@ function App() {
           </dialog>
         }
         { fail && 
-          <FontAwesomeIcon shake icon={faXmark} className="fail-mark" style={{"top": `calc(${fail[1]}px - 12.5px)`, "left": `calc(${fail[0]}px - 12.5px)`, color: "red" }}/>
+          <>
+            <FontAwesomeIcon shake icon={faXmark} className="fail-mark" style={{"top": `calc(${fail[1]}px - 12.5px)`, "left": `calc(${fail[0]}px - 12.5px)`, color: "red" }}/>
+            <audio autoPlay>
+              <source src={incorrect} type="audio/mp3"></source>
+            </audio>
+          </>
+
         }
         { boxCoordinates &&
           <span className="dot" style={{ "top": `calc(${boxCoordinates[1]}px - 12.5px)`, "left": `calc(${boxCoordinates[0]}px - 12.5px)` }}></span>
         }
         { deadpoolCoordinates &&
-          <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${deadpoolCoordinates[1]}`, "left": `${deadpoolCoordinates[0]}`, color: "#00ff00" }} />
+          <>
+            <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${deadpoolCoordinates[1]}`, "left": `${deadpoolCoordinates[0]}`, color: "#00ff00" }} />
+            <audio autoPlay>
+              <source src={correct} type="audio/mp3"></source>
+            </audio>
+          </>
+
         }
         { flashCoordinates &&
-          <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${flashCoordinates[1]}`, "left": `${flashCoordinates[0]}`, color: "#00ff00" }} />
+          <>
+            <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${flashCoordinates[1]}`, "left": `${flashCoordinates[0]}`, color: "#00ff00" }} />
+            <audio autoPlay>
+              <source src={correct} type="audio/mp3"></source>
+            </audio>
+          </>
+
         }
         { spidermanCoordinates &&
-          <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${spidermanCoordinates[1]}`, "left": `${spidermanCoordinates[0]}`, color: "#00ff00" }} />
+          <>
+            <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${spidermanCoordinates[1]}`, "left": `${spidermanCoordinates[0]}`, color: "#00ff00" }} />
+            <audio autoPlay>
+              <source src={correct} type="audio/mp3"></source>
+            </audio>
+          </>
+          
         }
 
       </main>
       {deadpoolCoordinates && flashCoordinates && spidermanCoordinates &&
-        <ScoreboardPopup />
+        <>
+          <ScoreboardPopup />
+          <audio autoPlay>
+              <source src={win} type="audio/wav"></source>
+            </audio>
+        </>
+
       }
 
     </>
