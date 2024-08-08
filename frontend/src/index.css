@@ -103,6 +103,11 @@ body {
   align-items: center;
 }
 
+.targeting-box div:hover {
+  transform: scale(1.05);
+}
+
+
 .character-button {
   border-radius: 50%;
   width: 4rem;

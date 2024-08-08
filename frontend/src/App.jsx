@@ -22,15 +22,18 @@ function App() {
   const [flashCoordinates, setFlashCoordinates] = useState(null);
   const [spidermanCoordinates, setSpidermanCoordinates] = useState(null);
   const [fail, setFail] = useState(false);
-  const [hint, setHint] = useState(false);
+  const [hint, setHint] = useState(null);
 
   useEffect(()=>{
-    const timer = setTimeout( () => setHint(true) , 180000);
+    const timer = setTimeout( () => setHint(true) , 120000);
+    console.log(timer);
     return () => clearTimeout(timer);
   }, [hint])
 
   function startHintTimer() {
-    if (hint) setHint(false);
+    console.log("hi!")
+    if (hint) setHint(false)
+    if (hint === null) setHint(false);
   }
 
   function handleClick(e) {
