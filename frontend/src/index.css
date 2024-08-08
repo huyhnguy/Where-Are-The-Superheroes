@@ -296,6 +296,17 @@ body {
   background-color: #0054ae;
 }
 
+@keyframes slideIn {
+  0% {
+    transform: translateY(-300px);
+  }
+
+  100%{
+    transform: translateY(0px);
+  }
+  
+}
+
 .hint-popup {
   position: fixed;
   top: 0;
@@ -306,6 +317,8 @@ body {
   border-radius: 1rem;
   border: solid;
   margin: 1rem;
+  animation: 1s 1 ease-in slideIn;
+  
 }
 
 .hint-buttons {

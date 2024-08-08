@@ -22,7 +22,7 @@ function App() {
   const [hint, setHint] = useState(false);
 
   useEffect(()=>{
-    const timer = setTimeout( () => setHint(true) , 180000);
+    const timer = setTimeout( () => setHint(true) , 3000);
     return () => clearTimeout(timer);
   }, [hint])
 
