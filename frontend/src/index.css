@@ -44,8 +44,6 @@ body {
 .picture {
   width: 100%;
   display: block;
-  border-radius: 1rem;
-  border: solid 3px;
 }
 
 .first-row .title {
@@ -68,6 +66,8 @@ body {
   position: relative;
   width: 95%;
   margin: 3rem auto;
+  border-radius: 1rem;
+  border: solid 3px;
 }
 
 .fail-mark {
@@ -225,6 +225,11 @@ body {
   border: solid;
 }
 
+.scoreboard-popup h1, .scoreboard-popup p {
+  margin-top: 0;
+  text-align: center;
+}
+
 .scoreboard-popup form {
   display: flex;
   gap: 1rem;
@@ -287,7 +292,7 @@ body {
   all: unset;
   background-color: #007BFF;
   color: white;
-  padding: 0.25rem 1rem;
+  padding: 0.25rem 2rem;
   border-radius: 10px;
   cursor: pointer;
 }
@@ -324,6 +329,7 @@ body {
 .hint-buttons {
   display: flex;
   justify-content: space-around;
+  gap: 1rem;
 }
 
 .close-button {
@@ -334,3 +340,4 @@ body {
   color: red;
   cursor: pointer;
 }
+

@@ -22,7 +22,7 @@ function App() {
   const [hint, setHint] = useState(false);
 
   useEffect(()=>{
-    const timer = setTimeout( () => setHint(true) , 3000);
+    const timer = setTimeout( () => setHint(true) , 180000);
     return () => clearTimeout(timer);
   }, [hint])
 
@@ -44,7 +44,6 @@ function App() {
       setCoordinatePercentages([xCoordinatePercentage, yCoordinatePercentage]);
       setBoxCoordinates([leftPosition, topPosition]);
       setFail(false);
-      console.log([xCoordinatePercentage, yCoordinatePercentage]);
     }
   }
 

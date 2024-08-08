@@ -28,7 +28,7 @@ export default function Hint({ startHintTimer, characterCoordinates }) {
         <div className="hint-popup" style={{ visibility: giveHint === false && "hidden", pointerEvents: giveHint === false && "none", display: giveHint && "flex", gap: giveHint && "10px" }}>
             {giveHint === null && 
                 <>
-                    <p style={{marginTop: "0"}}>Would you like a hint?</p>
+                    <p style={{marginTop: "0", textAlign: "center"}}>Would you like a hint?</p>
                     <div className="hint-buttons">
                         <button onClick={handleClose}>No</button>
                         <button onClick={handleYes}>Yes</button>

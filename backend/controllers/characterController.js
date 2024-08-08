@@ -2,7 +2,6 @@ const Character = require("../models/character");
 const asyncHandler = require("express-async-handler");
 
 exports.deadpool = asyncHandler(async (req, res, next) => {
-    console.log(req.body);
     const deadpool = await Character.findOne({ name: "Deadpool"}).exec();
 
     if (deadpool === null) {
