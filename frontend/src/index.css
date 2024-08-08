@@ -219,11 +219,16 @@ body {
   background-color: white;
   padding: 1rem;
   position: fixed;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  top: 50%;
+  left: 0;
+  right: 0;
+  width: max-content;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  height: max-content;
   border-radius: 1rem;
   border: solid;
+  animation: 0.125s 1 ease-in grow;
 }
 
 .scoreboard-popup h1, .scoreboard-popup p {
