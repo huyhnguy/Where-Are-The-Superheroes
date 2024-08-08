@@ -40,28 +40,13 @@ export default function ScoreboardPopup() {
 
     }
 
-    
-
-    /*return(
-        <div className="popup-container" style={{zIndex : openPopup ? 10 : -1}}>
-            <dialog className="scoreboard-popup" open={openPopup}>
-                <p>Put your score on the scoreboard!</p>
-                <form action="" method="POST">
-                <label htmlFor="name">Name</label>
-                <input type="text" name="name" id="name" required />
-                <input type="submit" value="submit" onClick={handleSubmit}/>
-                </form>
-            </dialog>
-        </div>
-    )*/
-
     return(
         <div className="scoreboard-popup" >
             <p style={{marginTop: "0", textAlign: "center", fontSize: "1.25rem"}}>Put your score on the scoreboard!</p>
             <form action="" method="POST">
                 <label htmlFor="name">Name</label>
                 <input type="text" name="name" id="name" required />
-                <input type="submit" value="Submit" onClick={handleSubmit}/>
+                <input className="submit" type="submit" value="Submit" onClick={handleSubmit}/>
             </form>
         </div>
     )

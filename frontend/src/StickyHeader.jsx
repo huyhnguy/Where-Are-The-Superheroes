@@ -57,7 +57,11 @@ export default function StickyHeader({ deadpoolCoordinates, flashCoordinates, sp
                 }
             </div>
             </div>
-            { spidermanCoordinates && flashCoordinates && deadpoolCoordinates ? <Timer isRunning={false} /> : <Timer isRunning={true}/>}
+            { spidermanCoordinates && flashCoordinates && deadpoolCoordinates ? 
+                <Timer isRunning={false} /> 
+                : 
+                <Timer isRunning={true} />
+            }
         </div>
 
 

@@ -12,7 +12,7 @@ export default function Replay() {
     
     return(
             <button className="replay" onClick={handleClick}>
-                <FontAwesomeIcon icon={faRotateRight} style={{color: "#000000",}} />            
+                <FontAwesomeIcon className="replay-icon" spin icon={faRotateRight} />            
             </button>
     )
 }

@@ -11,6 +11,7 @@ export default function Timer({ isRunning }) {
             timer.current = setInterval(() => {
                 setTime(pre => pre + 1)
             }, 1000)
+
         }
         return () => clearInterval(timer.current);
 

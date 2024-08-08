@@ -3,11 +3,13 @@ import deadpool from "./assets/deadpool.jpg"
 import flash from "./assets/flash.jpg"
 import spiderman from "./assets/spiderman.jpg"
 import "./index.css"
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ScoreboardPopup from "./ScoreboardPopup"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircleCheck } from '@fortawesome/free-regular-svg-icons'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import StickyHeader from "./StickyHeader"
+import Hint from "./Hint"
 
 
 function App() {
@@ -17,6 +19,16 @@ function App() {
   const [flashCoordinates, setFlashCoordinates] = useState(null);
   const [spidermanCoordinates, setSpidermanCoordinates] = useState(null);
   const [fail, setFail] = useState(false);
+  const [hint, setHint] = useState(false);
+
+  useEffect(()=>{
+    const timer = setTimeout( () => setHint(true) , 180000);
+    return () => clearTimeout(timer);
+  }, [hint])
+
+  function startHintTimer() {
+    if (hint) setHint(false);
+  }
 
   function handleClick(e) {
     if (boxCoordinates) {
@@ -31,6 +43,7 @@ function App() {
       const yCoordinatePercentage = topPosition / pictureDimensions.height;
       setCoordinatePercentages([xCoordinatePercentage, yCoordinatePercentage]);
       setBoxCoordinates([leftPosition, topPosition]);
+      setFail(false);
       console.log([xCoordinatePercentage, yCoordinatePercentage]);
     }
   }
@@ -63,6 +76,7 @@ function App() {
           if (character === "spiderman") {
             setSpidermanCoordinates([boxCoordinates[0] - 12.5, boxCoordinates[1] - 12.5])
           }
+          startHintTimer();
         } else {
           setFail(boxCoordinates);
         }
@@ -79,6 +93,9 @@ function App() {
 
   return (
     <>
+      {hint && 
+        <Hint startHintTimer={startHintTimer} characterCoordinates={[deadpoolCoordinates, flashCoordinates, spidermanCoordinates]}/>
+      }
       <StickyHeader deadpoolCoordinates={deadpoolCoordinates} flashCoordinates={flashCoordinates} spidermanCoordinates={spidermanCoordinates}/>
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
@@ -111,19 +128,19 @@ function App() {
           </dialog>
         }
         { fail && 
-          <FontAwesomeIcon icon={faXmark} className="fail-mark" style={{"top": `calc(${fail[1]}px - 12.5px)`, "left": `calc(${fail[0]}px - 12.5px)`}}/>
+          <FontAwesomeIcon shake icon={faXmark} className="fail-mark" style={{"top": `calc(${fail[1]}px - 12.5px)`, "left": `calc(${fail[0]}px - 12.5px)`, color: "red" }}/>
         }
         { boxCoordinates &&
           <span className="dot" style={{ "top": `calc(${boxCoordinates[1]}px - 12.5px)`, "left": `calc(${boxCoordinates[0]}px - 12.5px)` }}></span>
         }
         { deadpoolCoordinates &&
-          <span className="dot-green" style={{ "top": `${deadpoolCoordinates[1]}px`, "left": `${deadpoolCoordinates[0]}px` }}></span>
+          <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${deadpoolCoordinates[1]}`, "left": `${deadpoolCoordinates[0]}`, color: "#00ff00" }} />
         }
         { flashCoordinates &&
-          <span className="dot-green" style={{ "top": `${flashCoordinates[1]}px`, "left": `${flashCoordinates[0]}px` }}></span>
+          <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${flashCoordinates[1]}`, "left": `${flashCoordinates[0]}`, color: "#00ff00" }} />
         }
         { spidermanCoordinates &&
-          <span className="dot-green" style={{ "top": `${spidermanCoordinates[1]}px`, "left": `${spidermanCoordinates[0]}px` }}></span>
+          <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${spidermanCoordinates[1]}`, "left": `${spidermanCoordinates[0]}`, color: "#00ff00" }} />
         }
 
       </main>
