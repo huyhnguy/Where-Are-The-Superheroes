@@ -2,7 +2,7 @@
     "name": "wheres-waldo-backend",
     "version": "1.0.0",
     "scripts": {
-      "heroku-postbuild": "cd backend && npm install && npm run build"
+      "heroku-postbuild": "echo 'Skipping build step'"
     },
     "engines": {
         "node": "18.17.1"
