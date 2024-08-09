@@ -26,12 +26,10 @@ function App() {
 
   useEffect(()=>{
     const timer = setTimeout( () => setHint(true) , 120000);
-    console.log(timer);
     return () => clearTimeout(timer);
   }, [hint])
 
   function startHintTimer() {
-    console.log("hi!")
     if (hint) setHint(false)
     if (hint === null) setHint(false);
   }
@@ -93,6 +91,10 @@ function App() {
       setCoordinatePercentages(null);
       setBoxCoordinates(null);
       targetingBox.close();
+
+      if (deadpoolCoordinates && flashCoordinates && spidermanCoordinates) {
+        document.body.style.zoom = "90%";
+      }
 
   }
 
