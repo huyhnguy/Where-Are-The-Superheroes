@@ -52,7 +52,7 @@ function App() {
   }
 
   function handleCharacter(character) {
-    const url = 'http://localhost:3000/api/characters/' + character;
+    const url = 'https://wheres-waldo-backend-2-17acca0f1864.herokuapp.com/api/characters/' + character;
 
     const data = JSON.stringify({
       xCoordinatePercentage: coordinatePercentages[0],
