@@ -1,6 +1,0 @@
-{
-    "scripts": {
-      "start": "node ./backend/bin/www",
-      "devstart": "nodemon ./backend/bin/www"
-    }
-}
