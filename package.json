@@ -5,7 +5,7 @@
       "heroku-postbuild": "cd backend && npm install && npm run build"
     },
     "engines": {
-        "node": ">=18.17.1"
+        "node": "18.17.1"
       }
   }
   
