@@ -13,6 +13,13 @@ const mongoDB = process.env.MONGODB_URL;
 main().catch((err) => console.log(err));
 async function main() {
   await mongoose.connect(mongoDB);
+  try {
+    await mongoose.connect(mongoDB);
+    console.log("Connected to MongoDB");
+  } catch (error) {
+      console.error("Error connecting to MongoDB:", error);
+      res.status(500).send("Internal Server Error");
+  }
 }
 
 const indexRouter = require('./routes/index');
