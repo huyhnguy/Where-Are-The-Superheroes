@@ -85,6 +85,7 @@ body {
   margin: 0;
   padding: 0.5rem;
   display:flex;
+  flex-direction: column;
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
@@ -369,7 +370,6 @@ body {
   }
   
   .targeting-box[open] {
-    flex-direction: column;
     font-size: 0.5rem;
     --mask: radial-gradient(10px at 0 0, #0000 98%, #000);
   }
