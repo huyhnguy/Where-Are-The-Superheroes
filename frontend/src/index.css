@@ -156,6 +156,7 @@ body {
   height: 4.5rem;
   animation-iteration-count: var(--fa-animation-iteration-count, 1);
   color: #00ff00;
+  top:0;
 }
 
 @keyframes grow {
