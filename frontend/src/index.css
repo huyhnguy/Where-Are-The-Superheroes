@@ -37,6 +37,7 @@ body {
 .second-row {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
   margin-top: 0.5rem;
