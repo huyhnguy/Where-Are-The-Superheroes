@@ -23,15 +23,25 @@ function App() {
   const [spidermanCoordinates, setSpidermanCoordinates] = useState(null);
   const [fail, setFail] = useState(false);
   const [hint, setHint] = useState(null);
+  const [mute, setMute] = useState(false);
 
   useEffect(()=>{
-    const timer = setTimeout( () => setHint(true) , 120000);
-    return () => clearTimeout(timer);
+      const timer = setTimeout( () => setHint(true) , 60000);
+      return () => clearTimeout(timer);
   }, [hint])
 
   function startHintTimer() {
     if (hint) setHint(false)
     if (hint === null) setHint(false);
+  }
+
+  function handleMute() {
+    if (mute) {
+      setMute(false);
+    } else {
+      setMute(true);
+    }
+
   }
 
   function handleClick(e) {
@@ -52,7 +62,7 @@ function App() {
   }
 
   function handleCharacter(character) {
-    const url = 'https://wheres-waldo-backend-531ef25fc781.herokuapp.com/api/characters/' + character;
+    const url = 'http://localhost:3000/api/characters/' + character;
 
     const data = JSON.stringify({
       xCoordinatePercentage: coordinatePercentages[0],
@@ -69,6 +79,9 @@ function App() {
     })
       .then(res => res.json())
       .then(data => {
+        const correctAudio = document.getElementById("correct");
+        const incorrectAudio = document.getElementById("incorrect");
+
         if (data.message === "Pass") {
           if (character === "deadpool") {
             setDeadpoolCoordinates([boxCoordinates[0] - 12.5, boxCoordinates[1] - 12.5])
@@ -79,8 +92,14 @@ function App() {
           if (character === "spiderman") {
             setSpidermanCoordinates([boxCoordinates[0] - 12.5, boxCoordinates[1] - 12.5])
           }
+          if (!mute) {
+            correctAudio.play();
+          }
           startHintTimer();
         } else {
+          if (!mute) {
+            incorrectAudio.play();
+          }
           setFail(boxCoordinates);
         }
 
@@ -91,11 +110,17 @@ function App() {
       setCoordinatePercentages(null);
       setBoxCoordinates(null);
       targetingBox.close();
+  }
 
-      if (deadpoolCoordinates && flashCoordinates && spidermanCoordinates) {
-        document.body.style.zoom = "90%";
-      }
+  function handleWin() {
+    const winAudio = document.getElementById("win");
+    if (!mute) {
+      winAudio.play();
+    }
 
+    return (
+      <ScoreboardPopup />
+    )
   }
 
   return (
@@ -103,7 +128,18 @@ function App() {
       {hint && 
         <Hint startHintTimer={startHintTimer} characterCoordinates={[deadpoolCoordinates, flashCoordinates, spidermanCoordinates]}/>
       }
-      <StickyHeader deadpoolCoordinates={deadpoolCoordinates} flashCoordinates={flashCoordinates} spidermanCoordinates={spidermanCoordinates}/>
+      <StickyHeader muteFunction={handleMute} deadpoolCoordinates={deadpoolCoordinates} flashCoordinates={flashCoordinates} spidermanCoordinates={spidermanCoordinates}/>
+      <div>
+        <audio id="correct" preload="auto">
+          <source src={correct} type="audio/mp3"></source>
+        </audio>
+        <audio id="incorrect" preload="auto">
+          <source src={incorrect} type="audio/mp3"></source>
+        </audio>
+        <audio id="win" preload="auto">
+          <source src={win} type="audio/wav"></source>
+        </audio>
+      </div>
       <main className="picture-container">
         <img src={waldoPic} alt="" className="picture" onClick={(e) => {handleClick(e)}}/>
         { boxCoordinates &&
@@ -137,9 +173,6 @@ function App() {
         { fail && 
           <>
             <FontAwesomeIcon shake icon={faXmark} className="fail-mark" style={{"top": `calc(${fail[1]}px - 12.5px)`, "left": `calc(${fail[0]}px - 12.5px)`, color: "red" }}/>
-            <audio autoPlay>
-              <source src={incorrect} type="audio/mp3"></source>
-            </audio>
           </>
 
         }
@@ -149,40 +182,25 @@ function App() {
         { deadpoolCoordinates &&
           <>
             <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${deadpoolCoordinates[1]}`, "left": `${deadpoolCoordinates[0]}`, color: "#00ff00" }} />
-            <audio autoPlay>
-              <source src={correct} type="audio/mp3"></source>
-            </audio>
           </>
 
         }
         { flashCoordinates &&
           <>
             <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${flashCoordinates[1]}`, "left": `${flashCoordinates[0]}`, color: "#00ff00" }} />
-            <audio autoPlay>
-              <source src={correct} type="audio/mp3"></source>
-            </audio>
           </>
 
         }
         { spidermanCoordinates &&
           <>
             <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${spidermanCoordinates[1]}`, "left": `${spidermanCoordinates[0]}`, color: "#00ff00" }} />
-            <audio autoPlay>
-              <source src={correct} type="audio/mp3"></source>
-            </audio>
           </>
           
         }
 
       </main>
       {deadpoolCoordinates && flashCoordinates && spidermanCoordinates &&
-        <>
-          <ScoreboardPopup />
-          <audio autoPlay>
-              <source src={win} type="audio/wav"></source>
-            </audio>
-        </>
-
+        handleWin()
       }
 
     </>

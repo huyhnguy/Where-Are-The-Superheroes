@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faDownLeftAndUpRightToCenter, faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons'
+import { faDownLeftAndUpRightToCenter, faUpRightAndDownLeftFromCenter, faVolumeHigh, faVolumeXmark } from '@fortawesome/free-solid-svg-icons'
 import { faCircleCheck } from '@fortawesome/free-regular-svg-icons'
 import { useState, useEffect } from 'react'
 import deadpool from "./assets/deadpool.jpg"
@@ -8,14 +8,23 @@ import spiderman from "./assets/spiderman.jpg"
 import Timer from "./Timer"
 
 
-export default function StickyHeader({ deadpoolCoordinates, flashCoordinates, spidermanCoordinates }) {
+export default function StickyHeader({ muteFunction, deadpoolCoordinates, flashCoordinates, spidermanCoordinates }) {
     const [minimize, setMinimize] = useState(false);
+    const [audio, setAudio] = useState(true);
 
     function handleMinimize() {
         if (minimize) {
             setMinimize(false);
         } else {
             setMinimize(true);
+        }
+    }
+
+    function changeAudioIcon() {
+        if (audio) {
+            setAudio(false);
+        } else {
+            setAudio(true);
         }
     }
 
@@ -56,12 +65,30 @@ export default function StickyHeader({ deadpoolCoordinates, flashCoordinates, sp
                     <FontAwesomeIcon icon={faCircleCheck} beat className="checkmark" />
                     }
                 </div>
+
                 </div>
                 { spidermanCoordinates && flashCoordinates && deadpoolCoordinates ? 
                     <Timer isRunning={false} /> 
                     : 
                     <Timer isRunning={true} />
                 }
+                {audio ? 
+                    <button className="volume-button" onClick={() => {
+                        muteFunction();
+                        changeAudioIcon();
+                    }}>
+                        <FontAwesomeIcon icon={faVolumeHigh} style={{color: "#000000", height: "2rem"}} />
+                    </button>
+                    :
+                    <button className="volume-button" onClick={() => {
+                        muteFunction();
+                        changeAudioIcon();
+                    }}>
+                        <FontAwesomeIcon icon={faVolumeXmark} style={{color: "#000000", height: "2rem"}} />
+                    </button>
+
+                }
+
             </div>
       </section>
     )

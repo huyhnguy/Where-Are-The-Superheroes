@@ -333,21 +333,36 @@ body {
   
 }
 
-@keyframes slideFromBottom {
+@keyframes slideFromRight {
   0% {
-    transform: translateY(300px);
+    transform: translateX(600px);
   }
 
   100%{
-    transform: translateY(0px);
+    transform: translateX(0px);
   }
 }
 
 @media screen and (max-width: 900px) {
+  .sticky-header {
+    top:auto;
+    bottom:0;
+    border-radius: 0%;
+    border-bottom: none;
+    border-right: none;
+    border-top: solid;
+    left:0;
+    right: 0;
+  }
+
+  .picture-container {
+    margin: 1rem auto;
+  }
+
   .hint-popup {
+    bottom: 130px;
     top: auto;
-    bottom: 0;
-    animation: 0.75s 1 ease-in slideFromBottom;
+    animation: 1s 1 ease-in slideFromRight; 
   }
 }
 
@@ -366,3 +381,11 @@ body {
   cursor: pointer;
 }
 
+.volume-button {
+  all: unset;
+}
+
+.volume-button:hover {
+  transform:scale(1.1);
+  cursor: pointer;
+}

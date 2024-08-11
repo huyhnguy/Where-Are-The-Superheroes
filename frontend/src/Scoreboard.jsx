@@ -6,7 +6,7 @@ export default function Scoreboard() {
     const refContainer = useRef(null);
 
     useEffect(() => {
-        fetch('https://wheres-waldo-backend-531ef25fc781.herokuapp.com/api/scoreboard', {
+        fetch('http://localhost:3000/api/scoreboard', {
             method: 'GET',
             headers: {
               'Accept': 'application/json',
