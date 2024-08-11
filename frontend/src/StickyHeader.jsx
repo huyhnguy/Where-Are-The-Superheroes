@@ -84,7 +84,7 @@ export default function StickyHeader({ muteFunction, deadpoolCoordinates, flashC
                         muteFunction();
                         changeAudioIcon();
                     }}>
-                        <FontAwesomeIcon icon={faVolumeXmark} style={{color: "#000000", height: "2rem"}} />
+                        <FontAwesomeIcon icon={faVolumeXmark} style={{color: "#000000", height: "1.5rem"}} />
                     </button>
                 }
             </div>
