@@ -365,6 +365,22 @@ body {
     top: auto;
     animation: 1s 1 ease-in slideFromRight; 
   }
+  
+  .targeting-box[open] {
+    flex-direction: column;
+    font-size: 0.5rem;
+    --mask: radial-gradient(10px at 0 0, #0000 98%, #000);
+  }
+
+  .character-button {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .dot {
+    height: 12.5px;
+    width: 12.5px;
+  }
 }
 
 .hint-buttons {

@@ -13,6 +13,7 @@ import Hint from "./Hint"
 import correct from "./assets/audio/correct.mp3"
 import incorrect from "./assets/audio/incorrect.mp3"
 import win from "./assets/audio/win.wav"
+import useWindowDimensions from "./UseWindowDimensions"
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
   const [fail, setFail] = useState(false);
   const [hint, setHint] = useState(null);
   const [mute, setMute] = useState(false);
+  const { height, width } = useWindowDimensions();
 
   useEffect(()=>{
       const timer = setTimeout( () => setHint(true) , 45000);
@@ -171,31 +173,19 @@ function App() {
           </dialog>
         }
         { fail && 
-          <>
-            <FontAwesomeIcon shake icon={faXmark} className="fail-mark" style={{"top": `calc(${fail[1]}px - 12.5px)`, "left": `calc(${fail[0]}px - 12.5px)`, color: "red" }}/>
-          </>
-
+          <FontAwesomeIcon shake icon={faXmark} className="fail-mark" style={{"top": `calc(${fail[1]}px - 12.5px)`, "left": `calc(${fail[0]}px - 12.5px)`, color: "red" }}/>
         }
         { boxCoordinates &&
-          <span className="dot" style={{ "top": `calc(${boxCoordinates[1]}px - 12.5px)`, "left": `calc(${boxCoordinates[0]}px - 12.5px)` }}></span>
+          <span className="dot" style={{ "top": width > 900 ? `calc(${boxCoordinates[1]}px - 12.5px)` : `calc(${boxCoordinates[1]}px - 6.25px)`, "left": width > 900 ? `calc(${boxCoordinates[0]}px - 12.5px)` : `calc(${boxCoordinates[0]}px - 6.25px)`}}></span>
         }
         { deadpoolCoordinates &&
-          <>
-            <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${deadpoolCoordinates[1]}`, "left": `${deadpoolCoordinates[0]}`, color: "#00ff00" }} />
-          </>
-
+          <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${deadpoolCoordinates[1]}`, "left": `${deadpoolCoordinates[0]}`, color: "#00ff00" }} />
         }
         { flashCoordinates &&
-          <>
-            <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${flashCoordinates[1]}`, "left": `${flashCoordinates[0]}`, color: "#00ff00" }} />
-          </>
-
+          <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${flashCoordinates[1]}`, "left": `${flashCoordinates[0]}`, color: "#00ff00" }} />
         }
         { spidermanCoordinates &&
-          <>
-            <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${spidermanCoordinates[1]}`, "left": `${spidermanCoordinates[0]}`, color: "#00ff00" }} />
-          </>
-          
+          <FontAwesomeIcon icon={faCircleCheck} bounce className="fail-mark" style={{ "top": `${spidermanCoordinates[1]}`, "left": `${spidermanCoordinates[0]}`, color: "#00ff00" }} />
         }
 
       </main>
