@@ -26,7 +26,7 @@ function App() {
   const [mute, setMute] = useState(false);
 
   useEffect(()=>{
-      const timer = setTimeout( () => setHint(true) , 60000);
+      const timer = setTimeout( () => setHint(true) , 45000);
       return () => clearTimeout(timer);
   }, [hint])
 
