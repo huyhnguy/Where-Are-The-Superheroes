@@ -45,8 +45,6 @@ body {
 
 .third-row {
   display: flex;
-  justify-content: space-around;
-  margin: 0.5rem;
 }
 
 .picture {
@@ -147,10 +145,6 @@ body {
   border: 3px solid;
 }
 
-.characters {
-
-}
-
 .checkmark {
   position: absolute;
   height: 4.5rem;
@@ -194,6 +188,7 @@ body {
   font-size: 2rem;
   margin: 0;
   min-width: 100px;
+  margin-left: auto;
 }
 
 .popup-container {
@@ -412,6 +407,7 @@ body {
 
 .volume-button {
   all: unset;
+  margin-left: auto;
 }
 
 .volume-button:hover {

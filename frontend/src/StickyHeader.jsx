@@ -77,7 +77,7 @@ export default function StickyHeader({ muteFunction, deadpoolCoordinates, flashC
                         muteFunction();
                         changeAudioIcon();
                     }}>
-                        <FontAwesomeIcon icon={faVolumeHigh} style={{color: "#000000", height: "2rem"}} />
+                        <FontAwesomeIcon icon={faVolumeHigh} style={{color: "#000000", height: "1.5rem"}} />
                     </button>
                     :
                     <button className="volume-button" onClick={() => {
