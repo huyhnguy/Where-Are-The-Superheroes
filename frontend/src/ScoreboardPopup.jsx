@@ -39,7 +39,7 @@ export default function ScoreboardPopup() {
             time: duration,
         });
 
-        fetch('https://wheres-waldo-backend-531ef25fc781.herokuapp.com/scoreboard/score', {
+        fetch('https://wheres-waldo-backend-531ef25fc781.herokuapp.com/api/scoreboard/score', {
             method: 'POST',
             headers: {
               'Accept': 'application/json',
