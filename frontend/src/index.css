@@ -334,9 +334,9 @@ body {
   
 }
 
-@keyframes slideFromRight {
+@keyframes slideFromLeft {
   0% {
-    transform: translateX(600px);
+    transform: translateX(-600px);
   }
 
   100%{
@@ -361,9 +361,10 @@ body {
   }
 
   .hint-popup {
-    bottom: 130px;
-    top: auto;
-    animation: 1s 1 ease-in slideFromRight; 
+    right: auto;
+    left: 0;
+    top: 0;
+    animation: 1s 1 ease-in slideFromLeft; 
   }
   
   .targeting-box[open] {

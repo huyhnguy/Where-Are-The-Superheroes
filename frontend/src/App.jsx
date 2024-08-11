@@ -118,6 +118,7 @@ function App() {
     const winAudio = document.getElementById("win");
     if (!mute) {
       winAudio.play();
+      setMute(true);
     }
 
     return (
