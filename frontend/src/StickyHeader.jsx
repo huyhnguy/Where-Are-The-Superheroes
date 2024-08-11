@@ -43,7 +43,7 @@ export default function StickyHeader({ muteFunction, deadpoolCoordinates, flashC
             }
             </div>
             <div className="second-row" style={{ visibility: minimize && "hidden", position: minimize && "absolute" }}>
-                <div className="characters">
+                
                 <div style={{ position: "relative" }}>
                     <img src={deadpool} alt="deadpool" className="main-character-image" style={{ opacity: deadpoolCoordinates && "50%" }}/>
                     <p className="character-name">Deadpool</p>
@@ -65,8 +65,8 @@ export default function StickyHeader({ muteFunction, deadpoolCoordinates, flashC
                     <FontAwesomeIcon icon={faCircleCheck} beat className="checkmark" />
                     }
                 </div>
-
-                </div>
+            </div>
+            <div className="third-row" style={{ visibility: minimize && "hidden", position: minimize && "absolute" }}>
                 { spidermanCoordinates && flashCoordinates && deadpoolCoordinates ? 
                     <Timer isRunning={false} /> 
                     : 
@@ -86,9 +86,7 @@ export default function StickyHeader({ muteFunction, deadpoolCoordinates, flashC
                     }}>
                         <FontAwesomeIcon icon={faVolumeXmark} style={{color: "#000000", height: "2rem"}} />
                     </button>
-
                 }
-
             </div>
       </section>
     )

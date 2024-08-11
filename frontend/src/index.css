@@ -36,11 +36,17 @@ body {
 
 .second-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   flex-wrap: wrap;
   align-items: center;
   gap: 1rem;
-  margin-top: 0.5rem;
+  margin: 0.5rem;
+}
+
+.third-row {
+  display: flex;
+  justify-content: space-around;
+  margin: 0.5rem;
 }
 
 .picture {
@@ -54,12 +60,14 @@ body {
   text-align: center;
   margin: 0;
   font-size: 1rem;
+  margin-left: auto;
 }
 
 .minimize {
   all: unset;
   cursor: pointer;
   color: black;
+  margin-left: auto;
 }
 
 .minimize:hover {
@@ -140,10 +148,7 @@ body {
 }
 
 .characters {
-  display: flex;
-  gap: 1rem;
-  justify-content: center;
-  flex-wrap: wrap;
+
 }
 
 .checkmark {
